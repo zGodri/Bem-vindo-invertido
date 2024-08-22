@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mundo de Bleach</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <header>
+        <h1>Login Shinigami</h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Entre no Mundo de Bleach</h2>
+            <form id="login-form">
+                <label for="email">Email:</label>
+                <input type="email" id="login-email" name="email" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="login-senha" name="senha" required>
+
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+    </main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('#login-form');
+            const emailInput = document.querySelector('#login-email');
+            const senhaInput = document.querySelector('#login-senha');
+            const message = document.createElement('p');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const email = emailInput.value;
+                const senha = senhaInput.value;
+
+                const usuario = JSON.parse(localStorage.getItem(email));
+                if (usuario && usuario.senha === senha) {
+                    message.textContent = 'Login realizado com sucesso!';
+                    message.style.color = 'green';
+                } else {
+                    message.textContent = 'Email ou senha incorretos.';
+                    message.style.color = 'red';
+                }
+
+                form.appendChild(message);
+            });
+        });
+    </script>
+</body>
+</html>
